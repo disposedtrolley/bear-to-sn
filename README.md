@@ -66,7 +66,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## The Data Structure
 
-For our purposes, an item in Standard Notes can either be a `Note` or a `Tag`.
+In its decrypted form, a Standard Notes library can be exported as a massive JSON object with a top-level `items` array. The [Standard File documentation](http://standardfile.org/#items) states that an item can be a `Note`, `Tag`, `Extension` etc., but for our purposes we care about `Note`s and `Tag`s.
 
 ### Notes
 
@@ -107,3 +107,30 @@ Notes look like this (we can tell from the `content_type`):
 
 ### Tags
 
+`Tag`s appear in quite a similar data structure, shown below:
+
+```
+  "uuid": "642c94d4-70a7-422e-a70a-d60263d7f54f",
+  "content_type": "Tag",
+  "created_at": "2018-07-01T07:28:33.420Z",
+  "content": {
+    "title": "",
+    "references": [
+      {
+        "uuid": "8a1b67db-2773-47d2-a206-2b642fabbf5b",
+        "content_type": "Note"
+      }
+    ],
+    "appData": {
+      "org.standardnotes.sn": {
+        "client_updated_at": "2018-07-01T07:29:10.354Z"
+      }
+    }
+  },
+  "updated_at": "2018-07-01T07:29:10.743Z"
+}
+```
+
+These, conversely, refer to the `Note`s they're applied to, which implies a mutual relationship between these item types.
+
+## Modifying the items array
