@@ -133,4 +133,21 @@ Notes look like this (we can tell from the `content_type`):
 
 These, conversely, refer to the `Note`s they're applied to, which implies a mutual relationship between these item types.
 
-## Modifying the items array
+## How this utility will (hopefully) work
+
+```
+1. Ingest the JSON object
+2. Initialise a Tags array
+3. Iterate over each element, and remove any existing `Tag`s found. *This probably isn't necessary but let's start from the cleanest slate possible!*
+4. Iterate again from the beginning, and:
+  1. For each note found:
+    1. Examine the "content.text" property for any lines beginning with # with no spaces afterwards, and for these:
+      1. Extract the tag
+      2. Determine if the tag already exists in the Tags array
+        1. If it doesn't, generate a new tag object
+        2. Add a reference to the current note
+5. Add the tags to the JSON object
+6. Write the JSON object to a new file
+```
+
+Create a new `Tag` involves generate a `uuid`.
