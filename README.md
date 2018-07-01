@@ -57,3 +57,53 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```
 #travel #travel.asia #travel.asia.japan
 ```
+
+## The Battle Plan
+
+1. Export all Bear notes as `.md` files.
+2. Use the [plaintext to Standard Notes Converter](https://dashboard.standardnotes.org/tools) tool to convert the `.md` files to a big JSON array.
+3. Parse the JSON with this utility, which will extract any tags found in the body of the note and add the relevant Tag items to the JSON array, ensuring they're properly referenced back to the note.
+
+## The Data Structure
+
+For our purposes, an item in Standard Notes can either be a `Note` or a `Tag`.
+
+### Notes
+
+Notes look like this (we can tell from the `content_type`):
+
+```
+{
+  "uuid": "8a1b67db-2773-47d2-a206-2b642fabbf5b",
+  "content_type": "Note",
+  "created_at": "2018-06-30T12:22:26.733Z",
+  "content": {
+    "title": "",
+    "text": "",
+    "references": [
+      {
+        "uuid": "642c94d4-70a7-422e-a70a-d60263d7f54f",
+        "content_type": "Tag"
+      }
+    ],
+    "appData": {
+      "org.standardnotes.sn": {
+        "client_updated_at": "2018-07-01T07:28:33.420Z"
+      }
+    }
+  },
+  "updated_at": "2018-07-01T07:28:33.830Z"
+}
+```
+
+`Note`s can have references to one or more `Tag`s, shown in the `content.references` array. A reference object appears to simply consist of a `uuid` and the `content_type` being referenced:
+
+```
+{
+  "uuid": "642c94d4-70a7-422e-a70a-d60263d7f54f",
+  "content_type": "Tag"
+} 
+```
+
+### Tags
+
