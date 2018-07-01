@@ -1,9 +1,9 @@
 package main
 
-// import (
-// 	"github.com/disposedtrolley/bear-to-sn/app/bear-to-sn"
-// )
+import (
+	"github.com/disposedtrolley/bear-to-sn/app/bear-to-sn"
+)
 
 func main() {
-
+	bearToSN.ReadStandardNotesFile()
 }
